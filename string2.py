@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+import math
 """
 Kenzie assignment: String2
 """
 # Your name, plus anyone who helped you with this assignment.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "David Guzman"
 
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
@@ -24,7 +25,12 @@ __author__ = "???"
 
 def verbing(s):
     # your code here
-    return
+    if s.find("ing") == -1 and len(s) >= 3:
+        return f"{s}ing"
+    elif s.find("ing") != -1 and len(s) >= 3:
+        return f"{s}ly"
+    else:
+        return s
 
 
 # E. not_bad
@@ -37,8 +43,13 @@ def verbing(s):
 
 
 def not_bad(s):
+    not_index = s.find("not")
+    bad_index = s.find("bad")
+
     # your code here
-    return
+    if(not_index < bad_index):
+        return s.replace(s[not_index:bad_index+3], "good")
+    return s
 
 
 # F. front_back
@@ -53,11 +64,23 @@ def not_bad(s):
 
 def front_back(a, b):
     # your code here
-    return
+    a_list = list(a)
+    b_list = list(b)
+    front_side = "".join(
+        a_list[:math.ceil((len(a_list) / 2))]
+        +
+        b_list[:math.ceil(len(b_list) / 2)])
 
+    back_side = "".join(
+        a_list[math.ceil((len(a_list) / 2)):]
+        +
+        b_list[math.ceil(len(b_list) / 2):])
 
+    return front_side + back_side
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
+
+
 def test(got, expected):
     if got == expected:
         prefix = ' OK '
